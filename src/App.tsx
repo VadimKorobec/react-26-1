@@ -1,22 +1,17 @@
+import { useState } from "react";
 import { PostsList } from "./components/PostsList/PostsList";
 import type { Post } from "./types/post";
-
-const posts: Post[] = [
-  {
-    id: '1',
-    author: "Cat",
-    text: "React js is awesome!",
-  },
-  {
-    id: '2',
-    author: "Mouse",
-    text: "NextJs is awesome!",
-  },
-];
+import { NewPost } from "./components/NewPost/NewPost";
 
 export const App = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  const handleGetPosts = (data: Post) => {
+    setPosts(prevState => [...prevState,data]);
+  };
   return (
     <>
+      <NewPost onSubmit={ handleGetPosts} />
       <PostsList posts={posts} />
     </>
   );

@@ -3,7 +3,11 @@ import type { Post } from "../../types/post";
 import { nanoid } from "nanoid";
 import styles from "./NewPost.module.css";
 
-export const NewPost = () => {
+interface NewPostProps {
+  onSubmit: (post: Post) => void;
+}
+
+export const NewPost = ({ onSubmit }: NewPostProps) => {
   const [text, setText] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
 
@@ -23,6 +27,14 @@ export const NewPost = () => {
       text,
       author,
     };
+
+    onSubmit(newPost);
+    reset();
+  };
+
+  const reset = () => {
+    setText("");
+    setAuthor("");
   };
 
   return (
