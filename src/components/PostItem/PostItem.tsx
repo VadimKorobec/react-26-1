@@ -6,11 +6,11 @@ interface PostItemProps {
 }
 
 export const PostItem = ({ post }: PostItemProps) => {
-    const { auther, text } = post;
+    const { author, text } = post;
     
   return (
     <div className={styles.post}>
-      <p className={styles.author}>{auther}</p>
+      <p className={styles.author}>{author}</p>
       <p className={styles.text}>{text}</p>
     </div>
   );

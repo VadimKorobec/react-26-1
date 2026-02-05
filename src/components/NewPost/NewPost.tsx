@@ -1,23 +1,53 @@
 import { useState } from "react";
+import type { Post } from "../../types/post";
+import { nanoid } from "nanoid";
 import styles from "./NewPost.module.css";
 
 export const NewPost = () => {
   const [text, setText] = useState<string>("");
+  const [author, setAuthor] = useState<string>("");
 
   const handleChangeBody = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
 
+  const handleChangeAuthor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthor(e.target.value);
+  };
+
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const newPost: Post = {
+      id: nanoid(),
+      text,
+      author,
+    };
+  };
+
   return (
-    <form className={styles.form}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <p>
         <label htmlFor="body">Text</label>
-        <textarea onChange={handleChangeBody} id="body" required rows={3} />
+        <textarea
+          onChange={handleChangeBody}
+          value={text}
+          id="body"
+          required
+          rows={3}
+        />
       </p>
       <p>{text}</p>
+      <p>{author}</p>
       <p>
         <label htmlFor="name">Your name</label>
-        <input type="text" id="name" required />
+        <input
+          onChange={handleChangeAuthor}
+          value={author}
+          type="text"
+          id="name"
+          required
+        />
       </p>
     </form>
   );
