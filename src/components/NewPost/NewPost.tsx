@@ -5,9 +5,10 @@ import styles from "./NewPost.module.css";
 
 interface NewPostProps {
   onSubmit: (post: Post) => void;
+  onClose: () => void;
 }
 
-export const NewPost = ({ onSubmit }: NewPostProps) => {
+export const NewPost = ({ onSubmit, onClose }: NewPostProps) => {
   const [text, setText] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
 
@@ -29,6 +30,7 @@ export const NewPost = ({ onSubmit }: NewPostProps) => {
     };
 
     onSubmit(newPost);
+    onClose()
     reset();
   };
 
@@ -49,8 +51,6 @@ export const NewPost = ({ onSubmit }: NewPostProps) => {
           rows={3}
         />
       </p>
-      <p>{text}</p>
-      <p>{author}</p>
       <p>
         <label htmlFor="name">Your name</label>
         <input
@@ -60,6 +60,10 @@ export const NewPost = ({ onSubmit }: NewPostProps) => {
           id="name"
           required
         />
+      </p>
+      <p className={styles.actions}>
+        <button type="button" onClick={onClose}>Cancel</button>
+        <button type="submit">Submit</button>
       </p>
     </form>
   );

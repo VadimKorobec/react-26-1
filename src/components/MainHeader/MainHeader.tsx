@@ -3,10 +3,10 @@ import { MdPostAdd, MdMessage } from "react-icons/md";
 import styles from "./MainHeader.module.css";
 
 interface MainHeaderProps {
-  onCreatePost: () => void;
+  onOpen: () => void;
 }
 
-export const MainHeader = ({ onCreatePost }: MainHeaderProps) => {
+export const MainHeader = ({ onOpen }: MainHeaderProps) => {
   return (
     <header className={styles.header}>
       <h1 className={styles.logo}>
@@ -14,7 +14,7 @@ export const MainHeader = ({ onCreatePost }: MainHeaderProps) => {
         React Poster
       </h1>
       <p>
-        <button className={styles.button} onClick={onCreatePost}>
+        <button className={styles.button} onClick={onOpen}>
           <MdPostAdd size={18} />
           New Post
         </button>

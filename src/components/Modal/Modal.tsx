@@ -1,10 +1,9 @@
 import { createPortal } from "react-dom";
 
-import styles from "./Madal.module.css";
+import styles from "./Modal.module.css";
 
 interface ModalProps {
   children: React.ReactNode;
-
   onClose: () => void;
 }
 
