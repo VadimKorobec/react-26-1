@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { Post } from "../../types/post";
-import { nanoid } from "nanoid";
 import styles from "./NewPost.module.css";
 
 interface NewPostProps {
@@ -24,13 +23,12 @@ export const NewPost = ({ onSubmit, onClose }: NewPostProps) => {
     e.preventDefault();
 
     const newPost: Post = {
-      id: nanoid(),
       text,
       author,
     };
 
     onSubmit(newPost);
-    onClose()
+    onClose();
     reset();
   };
 
@@ -62,7 +60,9 @@ export const NewPost = ({ onSubmit, onClose }: NewPostProps) => {
         />
       </p>
       <p className={styles.actions}>
-        <button type="button" onClick={onClose}>Cancel</button>
+        <button type="button" onClick={onClose}>
+          Cancel
+        </button>
         <button type="submit">Submit</button>
       </p>
     </form>
