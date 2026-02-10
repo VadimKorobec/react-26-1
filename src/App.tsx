@@ -12,14 +12,14 @@ export const App = () => {
     setPosts((prevState) => [...prevState, data]);
   };
 
-  const handleToggleModal = () => {
+  const handleCloseModal = () => {
     setModalIsVisible(false);
   };
 
   return (
     <>
       {modalIsVisible ? (
-        <Modal onClose={handleToggleModal}>
+        <Modal onClose={handleCloseModal}>
           <NewPost onSubmit={handleGetPosts} />
         </Modal>
       ) : null}
