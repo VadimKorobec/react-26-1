@@ -8,13 +8,15 @@ import { MainHeader } from "./components/MainHeader/MainHeader";
 export const App = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-  console.log(posts)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
+      setIsLoading(true);
       const response = await fetch("http://localhost:8080/posts");
-      const resData = await response.json();
+      const resData = (await response.json()) as { posts: Post[] };
       setPosts(resData.posts);
+      setIsLoading(false);
     };
 
     fetchPosts();
@@ -48,11 +50,11 @@ export const App = () => {
             <NewPost onSubmit={handleGetPosts} onClose={handleCloseModal} />
           </Modal>
         ) : null}
-        {posts.length > 0 ? (
-          <PostsList posts={posts} />
-        ) : (
+        {!isLoading && posts.length > 0 && <PostsList posts={posts} />}
+        {!isLoading && posts.length === 0 && (
           <p style={{ textAlign: "center" }}>Sorry we don't have any posts</p>
         )}
+        {isLoading && <p style={{ textAlign: "center" }}>Loading posts...</p>}
       </main>
     </>
   );
